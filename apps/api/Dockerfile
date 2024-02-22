@@ -4,10 +4,10 @@ FROM node:20-alpine AS base
   RUN corepack enable
 
 FROM base AS builder
-# Set working directory
-WORKDIR /app
-COPY . .
-RUN pnpm dlx turbo prune api --docker
+  # Set working directory
+  WORKDIR /app
+  COPY . .
+  RUN pnpm dlx turbo prune api --docker
 
 # Add lockfile and package.json's of isolated subworkspace
 FROM base AS installer
