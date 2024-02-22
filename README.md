@@ -21,7 +21,7 @@ Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
 
 ### Docker
 
-This repo is configured to be built with Docker, and Docker compose. To build all apps in this repo:
+This repo is configured to be built with [Docker](https://docs.docker.com/engine/install/), and Docker compose. To build all apps in this repo:
 
 ```
 # Start prod in detached mode
@@ -34,7 +34,7 @@ To shutdown all running containers:
 
 ```
 # Stop all running containers
-docker kill $(docker ps -q) && docker rm $(docker ps -a -q)
+docker-compose down --remove-orphans
 ```
 
 ### Utilities
