@@ -1,5 +1,5 @@
 {
-  "name": "with-docker",
+  "name": "pb4-exam",
   "version": "0.0.0",
   "private": true,
   "scripts": {
@@ -10,6 +10,7 @@
     "lint": "turbo run lint",
     "test": "turbo run test"
   },
+  "author": "Isar Ramses Cadena Gaona",
   "dependencies": {},
   "devDependencies": {
     "@repo/eslint-config": "workspace:*",
