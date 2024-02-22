@@ -11,15 +11,14 @@
     "test": "turbo run test"
   },
   "author": "Isar Ramses Cadena Gaona",
-  "dependencies": {},
   "devDependencies": {
     "@repo/eslint-config": "workspace:*",
     "prettier": "^3.1.1",
+    "prettier-plugin-tailwindcss": "^0.5.11",
     "turbo": "latest"
   },
   "engines": {
-    "node": ">=14.0.0",
-    "npm": ">=7.0.0"
+    "node": ">=18"
   },
   "packageManager": "pnpm@8.15.3"
 }
