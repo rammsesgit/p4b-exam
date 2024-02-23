@@ -1,6 +1,10 @@
 'use client'
 
+import { set } from '@/redux/features/profileSlice'
+import { useAppDispatch } from '@/redux/hooks'
 import Profile from '@repo/ui/profile'
+import { useRouter } from 'next/navigation'
+import { useEffect } from 'react'
 
 // TEST:
 const profiles = [
@@ -22,18 +26,30 @@ const profiles = [
 ]
 
 export default function Blogs() {
+  const router = useRouter()
+  const dispatch = useAppDispatch()
+
+  useEffect(() => {
+    // TODO: Get profiles
+  }, [])
+
+  const onChangeProfile = (profile: { id?: number; name: string; img_url?: string }) => {
+    dispatch(set(profile))
+    router.push('/blogs')
+  }
+
   return (
     <div className='flex justify-center items-center flex-col mt-[20vh] gap-20'>
       <h1 className='text-center'>Choose your profile</h1>
 
       <section className='grid grid-cols-2 sm:grid-cols-4 gap-6 max-w-2xl mx-auto'>
         {profiles.map(p => (
-          <button key={p.id}>
+          <button key={p.id} onClick={() => onChangeProfile(p)}>
             <Profile {...p} />
           </button>
         ))}
 
-        <button>
+        <button onClick={() => onChangeProfile({ name: 'Guest' })}>
           <Profile name='Guest' />
         </button>
       </section>

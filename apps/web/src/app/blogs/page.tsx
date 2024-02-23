@@ -1,5 +1,6 @@
 'use client'
 
+import { useAppSelector } from '@/redux/hooks'
 import { Button } from '@repo/ui/button'
 import { InputText } from '@repo/ui/input-text'
 import { PostPreview } from '@repo/ui/post-preview'
@@ -36,6 +37,8 @@ export default function Blogs() {
   const [showForm, setShowForm] = useState<boolean>(false)
   const [formHeight, setFormHeight] = useState<number>(238)
 
+  const profile = useAppSelector(state => state.profileReducer.value)
+
   useEffect(() => {
     const $newPostForm = document.getElementById('newPostForm')
     if ($newPostForm) {
@@ -70,7 +73,7 @@ export default function Blogs() {
       <section className='flex flex-col items-center'>
         <div className='text-center mb-12'>
           <h2>
-            Hi, <span className='font-semibold'>{'Guest'}</span>.
+            Hi, <span className='font-semibold'>{profile?.name}</span>.
           </h2>
           <Link href='/' className='text-xs underline text-secondary'>
             Change profile

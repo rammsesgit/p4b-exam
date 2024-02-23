@@ -1,15 +1,17 @@
-import '@repo/ui/styles.css'
 import './globals.css'
 
-import { inter, jura } from './fonts'
+import '@repo/ui/styles.css'
 import { Metadata } from 'next'
+import { inter, jura } from './fonts'
+import { ProfileProvider } from '@/redux/providers'
 
 export const metadata: Metadata = {
   title: {
     template: '%s | Blog',
-    default: 'Blog', // a default is required when creating a template
+    default: 'Blog',
   },
 }
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang='en'>
@@ -25,7 +27,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className={`${jura.variable} ${inter.variable}`}>
         <main className='main-content'>
           <span className='absolute pointer-events-none mix-blend-normal will-change-[filter] inset-x-0 rounded-full opacity-10 -top-[50vh] h-screen blur-[75px] bg-glow-conic' />
-          {children}
+          <ProfileProvider>{children}</ProfileProvider>
         </main>
       </body>
     </html>
