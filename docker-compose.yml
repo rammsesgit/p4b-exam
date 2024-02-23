@@ -7,18 +7,35 @@ services:
       context: .
       dockerfile: ./apps/web/Dockerfile
     restart: unless-stopped
+    depends_on:
+      - api
     ports:
       - 3000:3000
     networks:
       - app_network
+
   api:
     container_name: api
     build:
       context: .
       dockerfile: ./apps/api/Dockerfile
     restart: unless-stopped
+    depends_on:
+      - mysql
     ports:
       - 3001:3001
+    networks:
+      - app_network
+
+  mysql:
+    container_name: mysql
+    image: mysql:8.3.0
+    restart: unless-stopped
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_DATABASE: blog
+      MYSQL_ALLOW_EMPTY_PASSWORD: 1
     networks:
       - app_network
 
