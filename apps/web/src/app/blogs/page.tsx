@@ -35,8 +35,6 @@ export default function Blogs() {
   const [content, setContent] = useState<string>('')
   const [showForm, setShowForm] = useState<boolean>(false)
   const [formHeight, setFormHeight] = useState<number>(238)
-  const [response, setResponse] = useState<{ message: string } | null>(null)
-  const [error, setError] = useState<string | undefined>()
 
   useEffect(() => {
     const $newPostForm = document.getElementById('newPostForm')
@@ -53,11 +51,9 @@ export default function Blogs() {
         method: 'POST',
         body: new FormData(e.currentTarget),
       })
-      const response = await result.json()
-      setResponse(response)
+      await result.json()
     } catch (err) {
       console.error(err)
-      setError('Unable to fetch response')
     }
   }
 
