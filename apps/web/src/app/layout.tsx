@@ -7,8 +7,8 @@ import { ProfileProvider } from '@/redux/providers'
 
 export const metadata: Metadata = {
   title: {
-    template: '%s | Blog',
-    default: 'Blog',
+    template: '%s | P4B exam',
+    default: 'Blog | P4B exam',
   },
 }
 
@@ -16,11 +16,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang='en'>
       <head>
-        <title>Blog</title>
         <link rel='icon' href='/img/favicon.png' />
 
         <meta name='title' content='Blog | P4B exam' />
-        <meta itemProp='name' content='Blogs' />
+        <meta itemProp='name' content='Blog | P4B exam' />
         <meta name='description' content='React developer exam' />
         <meta itemProp='description' content='React developer exam' />
       </head>
