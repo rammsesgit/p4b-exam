@@ -1,6 +1,8 @@
+/*
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+*/
 
 :root {
   --color-primary: 59, 130, 246; /*#3b82f6*/
@@ -12,26 +14,9 @@
   --color-surface: 107, 114, 128; /*#6b7280*/
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  @apply ui-text-balance;
-}
-p {
-  @apply ui-text-pretty;
-}
-
-h1 {
-  @apply ui-text-3xl ui-font-semibold;
-}
-
 .btn {
-  @apply ui-px-5 ui-py-2 ui-text-base ui-flex
-  ui-border ui-border-neutral-700 ui-rounded-lg ui-duration-150
-  !ui-bg-[rgba(var(--color-surface),0.3)] backdrop:ui-blur-md;
+  @apply ui-px-5 ui-py-2 ui-text-base ui-flex ui-justify-center
+  ui-border ui-border-neutral-700 ui-rounded-lg ui-duration-150 backdrop:ui-blur-md;
 }
 .btn:disabled {
   @apply ui-opacity-50 ui-cursor-not-allowed;
@@ -46,6 +31,12 @@ h1 {
   @apply ui-border-[rgb(var(--color-primary))] !ui-bg-[rgba(var(--color-primary),0.3)];
 }
 
-.input {
-  @apply ui-rounded-lg ui-bg-transparent;
+/* Form elements */
+input[type='text'],
+.textarea {
+  @apply ui-rounded-lg ui-bg-transparent ui-transition-all ui-duration-300 ui-resize-none ui-overflow-hidden;
+}
+
+.label {
+  @apply ui-flex ui-flex-col;
 }

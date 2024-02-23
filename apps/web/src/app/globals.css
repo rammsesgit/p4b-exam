@@ -10,10 +10,34 @@
 
 body {
   color: rgb(var(--foreground-rgb));
+  font-family: var(--font-inter);
   background: linear-gradient(to bottom, transparent, rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
   @apply h-full overflow-hidden min-h-screen;
 }
 
 .main-content {
   @apply container relative mx-auto flex h-full max-w-7xl flex-col p-6 sm:p-10 gap-10;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-jura);
+  @apply text-balance;
+}
+p {
+  @apply text-pretty;
+}
+
+h1 {
+  @apply text-3xl font-semibold;
+}
+h2 {
+  @apply text-2xl font-semibold;
+}
+h3 {
+  @apply text-xl font-semibold;
 }

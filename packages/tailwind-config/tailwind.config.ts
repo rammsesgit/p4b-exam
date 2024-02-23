@@ -5,6 +5,17 @@ import typography from '@tailwindcss/typography'
 // We want each package to be responsible for its own content.
 const config: Omit<Config, 'content'> = {
   theme: {
+    screens: {
+      '3xsm': '320px',
+      '2xsm': '400px',
+      xsm: '480px',
+      sm: '640px',
+      md: '768px',
+      lg: '1024px',
+      xl: '1280px',
+      '2xl': '1536px',
+      '3xl': '1920px',
+    },
     extend: {
       backgroundImage: {
         'glow-conic': 'conic-gradient(from 180deg at 50% 50%, #2a8af6 0deg, #a853ba 180deg, #e92a67 360deg)',
