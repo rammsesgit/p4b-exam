@@ -28,6 +28,7 @@ const config: Omit<Config, 'content'> = {
         warning: '#EAB308',
         error: '#D41976',
         surface: '#6B7280',
+        highlight: '#e92a67',
       },
     },
   },

@@ -51,7 +51,7 @@ input[type='text'],
   }
 
   .author {
-    @apply ui-text-[#e92a67] ui-text-sm;
+    @apply ui-text-highlight ui-text-sm;
   }
 
   .title {
