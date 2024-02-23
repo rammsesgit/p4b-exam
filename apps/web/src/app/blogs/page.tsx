@@ -1,13 +1,34 @@
 'use client'
 
-// import '../globals.css'
-
 import { Button } from '@repo/ui/button'
 import { InputText } from '@repo/ui/input-text'
-// import '@repo/ui/styles.css'
+import { PostPreview } from '@repo/ui/post-preview'
 import { TextArea } from '@repo/ui/text-area'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
+
+// TEST:
+const posts = [
+  { id: 1, author: 'Author', title: 'Title', content: 'Content', timestamp: new Date().toISOString() },
+  {
+    id: 2,
+    author: 'Author',
+    title: 'Title',
+    content: 'Content Content Content Content Content',
+    timestamp: new Date().toISOString(),
+  },
+  { id: 3, author: 'Author', title: 'Title', content: 'Content', timestamp: new Date().toISOString() },
+  { id: 4, author: 'Author', title: 'Title', content: 'Content', timestamp: new Date().toISOString() },
+  { id: 5, author: 'Author', title: 'Title', content: 'Content', timestamp: new Date().toISOString() },
+  {
+    id: 6,
+    author: 'Author',
+    title: 'Title',
+    content:
+      'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Amet magnam excepturi deleniti alias deserunt aut, fugiat quod reprehenderit distinctio expedita, placeat molestias adipisci. Aliquid ea eius aperiam molestias amet. Labore.',
+    timestamp: new Date().toISOString(),
+  },
+]
 
 export default function Blogs() {
   const [title, setTitle] = useState<string>('')
@@ -100,8 +121,10 @@ export default function Blogs() {
         </div>
       </section>
 
-      <section>
-        <pre>// TODO: show blogs bentos</pre>
+      <section className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 '>
+        {posts.map(p => (
+          <PostPreview key={p.id} {...p} />
+        ))}
       </section>
     </>
   )

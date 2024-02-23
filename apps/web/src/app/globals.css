@@ -12,11 +12,11 @@ body {
   color: rgb(var(--foreground-rgb));
   font-family: var(--font-inter);
   background: linear-gradient(to bottom, transparent, rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
-  @apply h-full overflow-hidden min-h-screen;
+  @apply h-full overflow-y-auto min-h-screen;
 }
 
 .main-content {
-  @apply container relative mx-auto flex h-full max-w-7xl flex-col p-6 sm:p-10 gap-10;
+  @apply container relative mx-auto flex h-full max-w-5xl flex-col p-6 sm:p-10 gap-12;
 }
 
 h1,

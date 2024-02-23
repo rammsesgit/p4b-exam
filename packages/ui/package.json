@@ -8,7 +8,8 @@
     "./styles.css": "./dist/index.css",
     "./button": "./src/button.tsx",
     "./input-text": "./src/input-text.tsx",
-    "./text-area": "./src/text-area.tsx"
+    "./text-area": "./src/text-area.tsx",
+    "./post-preview": "./src/post-preview.tsx"
   },
   "scripts": {
     "build": "tailwindcss -i ./src/styles.css -o dist/index.css",
