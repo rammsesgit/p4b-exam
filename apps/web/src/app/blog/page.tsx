@@ -10,28 +10,26 @@ import { useEffect, useState } from 'react'
 
 // TEST:
 const posts = [
-  { id: 1, author: 'Author', title: 'Title', content: 'Content', timestamp: new Date().toISOString() },
+  { id: 1, author: 'Author', title: 'Title', content: 'Content' },
   {
     id: 2,
     author: 'Author',
     title: 'Title',
     content: 'Content Content Content Content Content',
-    timestamp: new Date().toISOString(),
   },
-  { id: 3, author: 'Author', title: 'Title', content: 'Content', timestamp: new Date().toISOString() },
-  { id: 4, author: 'Author', title: 'Title', content: 'Content', timestamp: new Date().toISOString() },
-  { id: 5, author: 'Author', title: 'Title', content: 'Content', timestamp: new Date().toISOString() },
+  { id: 3, author: 'Author', title: 'Title', content: 'Content' },
+  { id: 4, author: 'Author', title: 'Title', content: 'Content' },
+  { id: 5, author: 'Author', title: 'Title', content: 'Content' },
   {
     id: 6,
     author: 'Author',
     title: 'Title',
     content:
       'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Amet magnam excepturi deleniti alias deserunt aut, fugiat quod reprehenderit distinctio expedita, placeat molestias adipisci. Aliquid ea eius aperiam molestias amet. Labore.',
-    timestamp: new Date().toISOString(),
   },
 ]
 
-export default function Blogs() {
+export default function Blog() {
   const [title, setTitle] = useState<string>('')
   const [content, setContent] = useState<string>('')
   const [showForm, setShowForm] = useState<boolean>(false)

@@ -25,7 +25,7 @@ const profiles = [
   },
 ]
 
-export default function Blogs() {
+export default function Blog() {
   const router = useRouter()
   const dispatch = useAppDispatch()
 
@@ -35,7 +35,7 @@ export default function Blogs() {
 
   const onChangeProfile = (profile: { id?: number; name: string; img_url?: string }) => {
     dispatch(set(profile))
-    router.push('/blogs')
+    router.push('/blog')
   }
 
   return (

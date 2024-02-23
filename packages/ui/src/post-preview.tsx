@@ -17,7 +17,7 @@ export function PostPreview({
 
   return (
     <article className='card'>
-      <a href={`/blogs/${id}`}>
+      <a href={`/blog/${id}`}>
         <h3 className='author'>{author}</h3>
         <span className='title'>{title}</span>
         <p className='content'>{contentToShow}</p>
