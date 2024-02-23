@@ -62,3 +62,22 @@ input[type='text'],
     @apply ui-opacity-60;
   }
 }
+
+.profile {
+  @apply ui-p-3 ui-pb-1 ui-border ui-border-transparent ui-rounded-3xl ui-transition-all ui-duration-300
+  hover:ui-border-primary hover:ui-shadow-primary hover:ui-shadow;
+
+  img {
+    @apply ui-rounded-full ui-transition-all ui-duration-300;
+  }
+
+  figcaption {
+    @apply ui-text-xl ui-opacity-70 ui-transition-opacity ui-duration-300;
+  }
+}
+
+.profile:hover {
+  figcaption {
+    @apply ui-opacity-100;
+  }
+}

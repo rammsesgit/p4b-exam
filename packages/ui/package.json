@@ -9,6 +9,7 @@
     "./button": "./src/button.tsx",
     "./input-text": "./src/input-text.tsx",
     "./text-area": "./src/text-area.tsx",
+    "./profile": "./src/profile.tsx",
     "./post-preview": "./src/post-preview.tsx"
   },
   "scripts": {
