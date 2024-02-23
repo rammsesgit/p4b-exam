@@ -2,7 +2,14 @@ import '@repo/ui/styles.css'
 import './globals.css'
 
 import { inter, jura } from './fonts'
+import { Metadata } from 'next'
 
+export const metadata: Metadata = {
+  title: {
+    template: '%s | Blog',
+    default: 'Blog', // a default is required when creating a template
+  },
+}
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang='en'>
