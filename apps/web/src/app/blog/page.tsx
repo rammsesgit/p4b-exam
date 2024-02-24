@@ -10,9 +10,11 @@ import Link from 'next/link'
 import { useEffect, useState } from 'react'
 
 export default function Blog() {
+  const [pattern, setPattern] = useState<string>('')
   const [title, setTitle] = useState<string>('')
   const [content, setContent] = useState<string>('')
-  const [showForm, setShowForm] = useState<boolean>(false)
+  const [showCreateForm, setShowCreateForm] = useState<boolean>(false)
+  const [showSearchForm, setShowSearchForm] = useState<boolean>(false)
   const [formHeight, setFormHeight] = useState<number>(238)
   const [posts, setPosts] = useState<{ id: number; author: string; title: string; content: string }[]>([])
 
@@ -26,8 +28,7 @@ export default function Blog() {
   }, [content])
 
   const setup = async () => {
-    const profiles = await getPosts()
-    setPosts(profiles)
+    setPosts(await getPosts())
   }
 
   useEffect(() => {
@@ -46,10 +47,25 @@ export default function Blog() {
     }
   }
 
+  const onSearch = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+
+    try {
+      await createPost({ author: profile?.name || 'Guest', content, title })
+      onReset()
+      setup()
+    } catch (err) {
+      console.error(err)
+    }
+  }
+
   const onReset = () => {
+    setPattern('')
+    setShowSearchForm(false)
+
     setTitle('')
     setContent('')
-    setShowForm(false)
+    setShowCreateForm(false)
   }
 
   return (
@@ -66,35 +82,84 @@ export default function Blog() {
           </Link>
         </div>
 
-        <div
-          className={` transition-all duration-300
-              ${!showForm ? 'opacity-100 scale-100 h-[42px]' : 'opacity-0 scale-0 h-0'}
+        <div className='flex gap-4'>
+          <div
+            className={`transition-all duration-300
+              ${showSearchForm || showCreateForm ? 'opacity-0 scale-0 h-0' : 'opacity-100 scale-100 h-[42px]'}
             `}
-        >
-          <Button className='group' onClick={() => setShowForm(true)}>
-            <span className='w-0 group-hover:w-20 group-hover:opacity-100 transition-all duration-300 overflow-hidden whitespace-nowrap opacity-0'>
-              Add post
-            </span>
-            <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='currentColor' className='w-6 h-6'>
-              <path
-                fillRule='evenodd'
-                d='M12 3.75a.75.75 0 0 1 .75.75v6.75h6.75a.75.75 0 0 1 0 1.5h-6.75v6.75a.75.75 0 0 1-1.5 0v-6.75H4.5a.75.75 0 0 1 0-1.5h6.75V4.5a.75.75 0 0 1 .75-.75Z'
-                clipRule='evenodd'
-              />
-            </svg>
-          </Button>
+          >
+            <Button className='group' onClick={() => setShowSearchForm(true)}>
+              <span className='w-0 group-hover:w-16 group-hover:opacity-100 transition-all duration-300 overflow-hidden opacity-0'>
+                Search
+              </span>
+              <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='currentColor' className='w-6 h-6'>
+                <path
+                  fillRule='evenodd'
+                  d='M10.5 3.75a6.75 6.75 0 1 0 0 13.5 6.75 6.75 0 0 0 0-13.5ZM2.25 10.5a8.25 8.25 0 1 1 14.59 5.28l4.69 4.69a.75.75 0 1 1-1.06 1.06l-4.69-4.69A8.25 8.25 0 0 1 2.25 10.5Z'
+                  clipRule='evenodd'
+                />
+              </svg>
+            </Button>
+          </div>
+
+          <div
+            className={`transition-all duration-300
+              ${showSearchForm || showCreateForm ? 'opacity-0 scale-0 h-0' : 'opacity-100 scale-100 h-[42px]'}
+            `}
+          >
+            <Button className='group' onClick={() => setShowCreateForm(true)}>
+              <span className='w-0 group-hover:w-20 group-hover:opacity-100 transition-all duration-300 overflow-hidden whitespace-nowrap opacity-0'>
+                Add post
+              </span>
+              <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='currentColor' className='w-6 h-6'>
+                <path
+                  fillRule='evenodd'
+                  d='M12 3.75a.75.75 0 0 1 .75.75v6.75h6.75a.75.75 0 0 1 0 1.5h-6.75v6.75a.75.75 0 0 1-1.5 0v-6.75H4.5a.75.75 0 0 1 0-1.5h6.75V4.5a.75.75 0 0 1 .75-.75Z'
+                  clipRule='evenodd'
+                />
+              </svg>
+            </Button>
+          </div>
         </div>
 
         <div
           className={`overflow-hidden transition-all duration-300 w-full
-            ${showForm ? `opacity-100 scale-100 h-[${formHeight + 16}px]` : 'opacity-0 scale-0 h-0'}
+            ${showSearchForm ? `opacity-100 scale-100 h-[${formHeight + 16}px]` : 'opacity-0 scale-0 h-0'}
           `}
         >
-          <form id='newPostForm' onSubmit={onSubmit} className='flex flex-col gap-4 w-full max-w-md mx-auto p-1'>
+          <form
+            id='newPostForm'
+            onSubmit={onSearch}
+            onKeyUp={e => e.code === 'Escape' && onReset()}
+            className='flex flex-col gap-4 w-full max-w-md mx-auto p-1'
+          >
+            <InputText
+              label='Type a title, author or content'
+              value={pattern}
+              onChange={e => setPattern(e.target.value)}
+            />
+
+            <Button className='w-full 3xsm:w-max ml-auto' type='button' onClick={onReset}>
+              Cancel
+            </Button>
+          </form>
+        </div>
+
+        <div
+          className={`overflow-hidden transition-all duration-300 w-full
+            ${showCreateForm ? `opacity-100 scale-100 h-[${formHeight + 16}px]` : 'opacity-0 scale-0 h-0'}
+          `}
+        >
+          <form
+            id='newPostForm'
+            onSubmit={onSubmit}
+            onKeyUp={e => e.code === 'Escape' && onReset()}
+            className='flex flex-col gap-4 w-full max-w-md mx-auto p-1'
+          >
             <InputText label='Title' value={title} onChange={e => setTitle(e.target.value)} />
             <TextArea label='Content' value={content} onChange={e => setContent(e.target.value)} />
 
-            <div className='flex flex-col 2xsm:flex-row gap-4 ml-auto w-full sm:w-max mt-2'>
+            <div className='flex flex-col 2xsm:flex-row gap-4 ml-auto w-full sm:w-max'>
               <Button className='btn w-full sm:w-max' disabled={!title || !content}>
                 Submit
               </Button>
@@ -108,7 +173,14 @@ export default function Blog() {
 
       <section className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 '>
         {posts.length
-          ? posts.map(p => <PostPreview key={p.id} {...p} />)
+          ? posts
+              .filter(
+                p =>
+                  p.author.toLowerCase().includes(pattern.toLowerCase()) ||
+                  p.title.toLowerCase().includes(pattern.toLowerCase()) ||
+                  p.content.toLowerCase().includes(pattern.toLowerCase()),
+              )
+              .map(p => <PostPreview key={p.id} {...p} />)
           : [true, true, true].map((_, i) => (
               <div
                 key={i}
