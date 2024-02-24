@@ -15,5 +15,5 @@ export class Post {
   content: string;
 
   @Column()
-  author: number;
+  author: string;
 }
