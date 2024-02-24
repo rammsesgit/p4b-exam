@@ -39,7 +39,7 @@
 }
 input[type='text'],
 .textarea {
-  @apply ui-rounded-lg ui-bg-transparent ui-transition-all ui-duration-300 ui-resize-none ui-overflow-hidden;
+  @apply ui-rounded-lg ui-bg-transparent ui-transition-all ui-duration-300 ui-resize-none ui-overflow-hidden ui-mt-1;
 }
 
 .card {
