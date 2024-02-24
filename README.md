@@ -45,13 +45,11 @@ docker-compose down
 #### If you want to use Turbo CLI:
 
 ```
-
 # 1. Create only the DB with docker compose
 docker-compose -f ./docker-compose-db.yml up
 
 # 2. Run the web and API with turbo
 turbo dev
-
 ```
 
 ### Utilities
