@@ -7,6 +7,7 @@ FROM base AS builder
 # Set working directory
 WORKDIR /app
 COPY . .
+RUN rm ./apps/api/.env.development.local
 RUN pnpm dlx turbo prune api --docker
 
 # Add lockfile and package.json's of isolated subworkspace

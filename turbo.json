@@ -1,11 +1,11 @@
 {
   "$schema": "https://turbo.build/schema.json",
-  "globalDependencies": ["**/.env.*local"],
-  "globalEnv": ["PORT"],
+  "globalEnv": ["API_HOST", "MYSQL_HOST"],
   "pipeline": {
     "build": {
       "outputs": ["dist/**", ".next/**", "!.next/cache/**", "public/dist/**"],
-      "dependsOn": ["^build"]
+      "dependsOn": ["^build"],
+      "dotEnv": [".env.production.local"]
     },
     "test": {
       "outputs": ["coverage/**"],
@@ -16,7 +16,8 @@
     },
     "dev": {
       "cache": false,
-      "persistent": true
+      "persistent": true,
+      "dotEnv": [".env.development.local"]
     },
     "clean": {
       "cache": false
