@@ -5,35 +5,16 @@ import { Button } from '@repo/ui/button'
 import { InputText } from '@repo/ui/input-text'
 import { PostPreview } from '@repo/ui/post-preview'
 import { TextArea } from '@repo/ui/text-area'
+import { createPost, getPosts } from 'app/actions'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
-
-// TEST:
-const posts = [
-  { id: 1, author: 'Author', title: 'Title', content: 'Content' },
-  {
-    id: 2,
-    author: 'Author',
-    title: 'Title',
-    content: 'Content Content Content Content Content',
-  },
-  { id: 3, author: 'Author', title: 'Title', content: 'Content' },
-  { id: 4, author: 'Author', title: 'Title', content: 'Content' },
-  { id: 5, author: 'Author', title: 'Title', content: 'Content' },
-  {
-    id: 6,
-    author: 'Author',
-    title: 'Title',
-    content:
-      'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Amet magnam excepturi deleniti alias deserunt aut, fugiat quod reprehenderit distinctio expedita, placeat molestias adipisci. Aliquid ea eius aperiam molestias amet. Labore.',
-  },
-]
 
 export default function Blog() {
   const [title, setTitle] = useState<string>('')
   const [content, setContent] = useState<string>('')
   const [showForm, setShowForm] = useState<boolean>(false)
   const [formHeight, setFormHeight] = useState<number>(238)
+  const [posts, setPosts] = useState<{ id: number; author: string; title: string; content: string }[]>([])
 
   const profile = useAppSelector(state => state.profileReducer.value)
 
@@ -44,15 +25,22 @@ export default function Blog() {
     }
   }, [content])
 
+  const setup = async () => {
+    const profiles = await getPosts()
+    setPosts(profiles)
+  }
+
+  useEffect(() => {
+    setup()
+  }, [])
+
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
     try {
-      const result = await fetch('api/blog', {
-        method: 'POST',
-        body: new FormData(e.currentTarget),
-      })
-      await result.json()
+      await createPost({ author: profile?.name || 'Guest', content, title })
+      onReset()
+      setup()
     } catch (err) {
       console.error(err)
     }
@@ -71,7 +59,7 @@ export default function Blog() {
       <section className='flex flex-col items-center'>
         <div className='text-center mb-12'>
           <h2>
-            Hi, <span className='font-semibold'>{profile?.name}</span>.
+            Hi, <span className='font-semibold'>{profile?.name || 'Guest'}</span>.
           </h2>
           <Link href='/' className='text-xs underline text-secondary'>
             Change profile
@@ -102,7 +90,7 @@ export default function Blog() {
             ${showForm ? `opacity-100 scale-100 h-[${formHeight + 16}px]` : 'opacity-0 scale-0 h-0'}
           `}
         >
-          <form id='newPostForm' onSubmit={onSubmit} className='flex flex-col gap-4 w-full max-w-md mx-auto'>
+          <form id='newPostForm' onSubmit={onSubmit} className='flex flex-col gap-4 w-full max-w-md mx-auto p-1'>
             <InputText label='Title' value={title} onChange={e => setTitle(e.target.value)} />
             <TextArea label='Content' value={content} onChange={e => setContent(e.target.value)} />
 
@@ -119,9 +107,20 @@ export default function Blog() {
       </section>
 
       <section className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 '>
-        {posts.map(p => (
-          <PostPreview key={p.id} {...p} />
-        ))}
+        {posts.length
+          ? posts.map(p => <PostPreview key={p.id} {...p} />)
+          : [true, true, true].map((_, i) => (
+              <div
+                key={i}
+                className='animate-pulse w-full p-4 border border-slate-700/50 rounded-3xl gap-1 flex flex-col'
+              >
+                <div className='animate-pulse bg-slate-700/50 h-4 w-1/3 rounded-full' />
+                <div className='animate-pulse bg-slate-700/50 h-7 w-2/3 rounded-full my-2' />
+                <div className='animate-pulse bg-slate-700/50 h-4 w-full rounded-full' />
+                <div className='animate-pulse bg-slate-700/50 h-4 w-full rounded-full' />
+                <div className='animate-pulse bg-slate-700/50 h-4 w-2/3 rounded-full' />
+              </div>
+            ))}
       </section>
     </>
   )
