@@ -4,6 +4,8 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { PostsModule } from './posts/posts.module';
 import { Post } from './posts/post.entity';
+import { Profile } from './profiles/profile.entity';
+import { ProfilesModule } from './profiles/profiles.module';
 
 @Module({
   imports: [
@@ -13,10 +15,11 @@ import { Post } from './posts/post.entity';
       port: 3306,
       username: 'root',
       database: 'blog',
-      entities: [Post],
+      entities: [Post, Profile],
       synchronize: true,
     }),
     PostsModule,
+    ProfilesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
