@@ -14,4 +14,12 @@ export class PostsService {
     const newPost = this.postRepository.create(post);
     return this.postRepository.save(newPost);
   }
+
+  getPosts() {
+    return this.postRepository.find();
+  }
+
+  getPost(id: number) {
+    return this.postRepository.findOne({ where: { id } });
+  }
 }
