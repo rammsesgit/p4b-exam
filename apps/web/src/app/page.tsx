@@ -4,33 +4,21 @@ import { set } from '@/redux/features/profileSlice'
 import { useAppDispatch } from '@/redux/hooks'
 import Profile from '@repo/ui/profile'
 import { useRouter } from 'next/navigation'
-import { useEffect } from 'react'
-
-// TEST:
-const profiles = [
-  {
-    id: 1,
-    name: 'Sarah',
-    image_url: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?fit=facearea&facepad=4&w=198&h=198',
-  },
-  {
-    id: 2,
-    name: 'John',
-    image_url: 'https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?fit=facearea&facepad=4&w=198&h=198',
-  },
-  {
-    id: 3,
-    name: 'Bess',
-    image_url: 'https://images.unsplash.com/photo-1520813792240-56fc4a3765a7?fit=facearea&facepad=4&w=198&h=198',
-  },
-]
+import { useEffect, useState } from 'react'
+import { getProfiles } from './actions'
 
 export default function Blog() {
+  const [profiles, setProfiles] = useState<{ id: number; name: string; image_url?: string }[]>([])
   const router = useRouter()
   const dispatch = useAppDispatch()
 
+  const setup = async () => {
+    const profiles = await getProfiles()
+    setProfiles(profiles)
+  }
+
   useEffect(() => {
-    // TODO: Get profiles
+    setup()
   }, [])
 
   const onChangeProfile = (profile: { id?: number; name: string; image_url?: string }) => {
@@ -43,15 +31,26 @@ export default function Blog() {
       <h1 className='text-center'>Choose your profile</h1>
 
       <section className='grid grid-cols-2 sm:grid-cols-4 gap-6 max-w-2xl mx-auto'>
-        {profiles.map(p => (
-          <button key={p.id} onClick={() => onChangeProfile(p)}>
-            <Profile {...p} />
-          </button>
-        ))}
+        {profiles.length ? (
+          <>
+            {profiles.map(p => (
+              <button key={p.id} onClick={() => onChangeProfile(p)} className='custom-pulse'>
+                <Profile {...p} />
+              </button>
+            ))}
 
-        <button onClick={() => onChangeProfile({ name: 'Guest' })}>
-          <Profile name='Guest' />
-        </button>
+            <button onClick={() => onChangeProfile({ name: 'Guest' })} className='custom-pulse'>
+              <Profile name='Guest' />
+            </button>
+          </>
+        ) : (
+          [true, true, true, true].map(() => (
+            <div className='animate-pulse w-36 h-44 p-3 border border-slate-700/50 rounded-3xl flex flex-col gap-2 items-center justify-around'>
+              <div className='animate-pulse bg-slate-700/50 rounded-full size-28' />
+              <div className='animate-pulse bg-slate-700/50 h-7 w-full rounded-full' />
+            </div>
+          ))
+        )}
       </section>
     </div>
   )
