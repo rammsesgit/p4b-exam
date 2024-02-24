@@ -16,7 +16,7 @@ export class PostsService {
   }
 
   getPosts() {
-    return this.postRepository.find({ order: { created_at: 'DESC' } });
+    return this.postRepository.find({ order: { id: 'DESC' } });
   }
 
   getPost(id: number) {

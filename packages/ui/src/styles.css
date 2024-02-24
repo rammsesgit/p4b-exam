@@ -47,7 +47,7 @@ input[type='text'],
   hover:ui-bg-neutral-800/30;
 
   a {
-    @apply ui-h-full ui-px-5 ui-py-4 ui-flex ui-flex-col;
+    @apply ui-h-full ui-px-5 ui-py-4 ui-flex ui-flex-col ui-w-full;
   }
 
   .author {
