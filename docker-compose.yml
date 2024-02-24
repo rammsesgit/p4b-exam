@@ -1,29 +1,42 @@
 version: '3'
 
 services:
-  web:
-    container_name: web
-    build:
-      context: .
-      dockerfile: ./apps/web/Dockerfile
-    restart: unless-stopped
-    depends_on:
-      - api
-    ports:
-      - 3000:3000
-    networks:
-      - app_network
+  # web:
+  #   container_name: web
+  #   build:
+  #     context: .
+  #     dockerfile: ./apps/web/Dockerfile
+  #   restart: unless-stopped
+  #   depends_on:
+  #     - api
+  #   ports:
+  #     - 3000:3000
+  #   networks:
+  #     - app_network
 
-  api:
-    container_name: api
-    build:
-      context: .
-      dockerfile: ./apps/api/Dockerfile
-    restart: unless-stopped
+  # api:
+  #   container_name: api
+  #   build:
+  #     context: .
+  #     dockerfile: ./apps/api/Dockerfile
+  #   restart: unless-stopped
+  #   depends_on:
+  #     - mysql
+  #   ports:
+  #     - 3001:3001
+  #   networks:
+  #     - app_network
+
+  mysql_seeder:
+    container_name: mysql_seeder
+    image: mysql:8.3.0
     depends_on:
       - mysql
-    ports:
-      - 3001:3001
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: 1
+    volumes:
+      - ./seed.sql:/seed.sql
+    entrypoint: [ "bash", "-c", "sleep 5 && mysql --user=root --host=mysql --port=3306 blog < /seed.sql && exit"] 
     networks:
       - app_network
 
@@ -37,7 +50,7 @@ services:
       MYSQL_DATABASE: blog
       MYSQL_ALLOW_EMPTY_PASSWORD: 1
     networks:
-      - app_network
+      - app_network 
 
 # Define a network, which allows containers to communicate with each other, by using their container name as a hostname
 networks:

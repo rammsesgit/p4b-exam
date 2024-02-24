@@ -4,7 +4,7 @@ export interface ProfileState {
   value: {
     id?: number
     name: string
-    img_url?: string
+    image_url?: string
   } | null
 }
 

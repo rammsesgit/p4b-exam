@@ -11,17 +11,17 @@ const profiles = [
   {
     id: 1,
     name: 'Sarah',
-    img_url: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?fit=facearea&facepad=4&w=198&h=198',
+    image_url: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?fit=facearea&facepad=4&w=198&h=198',
   },
   {
     id: 2,
     name: 'John',
-    img_url: 'https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?fit=facearea&facepad=4&w=198&h=198',
+    image_url: 'https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?fit=facearea&facepad=4&w=198&h=198',
   },
   {
     id: 3,
     name: 'Bess',
-    img_url: 'https://images.unsplash.com/photo-1520813792240-56fc4a3765a7?fit=facearea&facepad=4&w=198&h=198',
+    image_url: 'https://images.unsplash.com/photo-1520813792240-56fc4a3765a7?fit=facearea&facepad=4&w=198&h=198',
   },
 ]
 
@@ -33,7 +33,7 @@ export default function Blog() {
     // TODO: Get profiles
   }, [])
 
-  const onChangeProfile = (profile: { id?: number; name: string; img_url?: string }) => {
+  const onChangeProfile = (profile: { id?: number; name: string; image_url?: string }) => {
     dispatch(set(profile))
     router.push('/blog')
   }

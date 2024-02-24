@@ -1,8 +1,8 @@
-export default function Profile({ name, img_url }: { name: string; img_url?: string }) {
+export default function Profile({ name, image_url }: { name: string; image_url?: string }) {
   return (
     <figure className='profile'>
-      {img_url ? (
-        <img src={img_url} alt={`Photo profile of ${name}`} />
+      {image_url ? (
+        <img src={image_url} alt={`Photo profile of ${name}`} />
       ) : (
         <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='#BABBBE' className=''>
           <path
