@@ -12,20 +12,21 @@ import { Post as PostEntity } from './post.entity';
 
 @Controller('posts')
 export class PostsController {
-  constructor(private postService: PostsService) {}
+  constructor(private postsService: PostsService) {}
 
   @Post()
   createPost(@Body() newPost: CreatePostDto): Promise<PostEntity> {
-    return this.postService.createPost(newPost);
+    console.log('CONTROLLER newPost', newPost); // TEST:
+    return this.postsService.createPost(newPost);
   }
 
   @Get()
   getPosts(): Promise<PostEntity[]> {
-    return this.postService.getPosts();
+    return this.postsService.getPosts();
   }
 
   @Get(':id')
   getPost(@Param('id', ParseIntPipe) id: number): Promise<PostEntity> {
-    return this.postService.getPost(id);
+    return this.postsService.getPost(id);
   }
 }

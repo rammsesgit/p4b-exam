@@ -4,15 +4,15 @@ import { ProfilesService } from './profiles.service';
 
 @Controller('profiles')
 export class ProfilesController {
-  constructor(private profileService: ProfilesService) {}
+  constructor(private profilesService: ProfilesService) {}
 
   @Get()
   getProfiles(): Promise<Profile[]> {
-    return this.profileService.getProfiles();
+    return this.profilesService.getProfiles();
   }
 
   @Get(':id')
   getProfile(@Param('id', ParseIntPipe) id: number): Promise<Profile> {
-    return this.profileService.getProfile(id);
+    return this.profilesService.getProfile(id);
   }
 }
