@@ -44,9 +44,12 @@ export default function Blog() {
             </button>
           </>
         ) : (
-          [true, true, true, true].map(() => (
-            <div className='animate-pulse w-36 h-44 p-3 border border-slate-700/50 rounded-3xl flex flex-col gap-2 items-center justify-around'>
-              <div className='animate-pulse bg-slate-700/50 rounded-full size-28' />
+          [true, true, true, true].map((_, i) => (
+            <div
+              key={i}
+              className='animate-pulse w-full p-3 border border-slate-700/30 rounded-3xl flex flex-col gap-2 items-center'
+            >
+              <div className='animate-pulse bg-slate-700/50 rounded-full size-28 mb-2' />
               <div className='animate-pulse bg-slate-700/50 h-7 w-full rounded-full' />
             </div>
           ))

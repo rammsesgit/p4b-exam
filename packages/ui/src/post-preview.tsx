@@ -16,7 +16,7 @@ export function PostPreview({
   }
 
   return (
-    <article className='card'>
+    <article className='card custom-pulse'>
       <a href={`/blog/${id}`}>
         <h3 className='author'>{author}</h3>
         <span className='title'>{title}</span>
