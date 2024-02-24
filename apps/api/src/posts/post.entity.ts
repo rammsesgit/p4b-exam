@@ -11,7 +11,7 @@ export class Post {
   @Column()
   title: string;
 
-  @Column()
+  @Column({ length: 1000 })
   content: string;
 
   @Column()
