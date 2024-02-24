@@ -16,7 +16,6 @@ export class PostsController {
 
   @Post()
   createPost(@Body() newPost: CreatePostDto): Promise<PostEntity> {
-    console.log('CONTROLLER newPost', newPost); // TEST:
     return this.postsService.createPost(newPost);
   }
 
