@@ -29,7 +29,7 @@
     @apply ui-scale-95;
   }
   &[type='submit'] {
-    @apply ui-border-[rgb(var(--color-primary))] !ui-bg-[rgba(var(--color-primary),0.3)];
+    @apply ui-border-[rgb(var(--color-primary))] !ui-bg-[rgba(var(--color-primary),0.2)];
   }
 }
 
@@ -43,11 +43,11 @@ input[type='text'],
 }
 
 .card {
-  @apply ui-flex ui-flex-col ui-gap-2 ui-rounded-2xl ui-border ui-transition-colors ui-duration-150 ui-border-neutral-700
+  @apply ui-flex ui-rounded-2xl ui-border ui-transition-colors ui-duration-150 ui-border-neutral-700
   hover:ui-bg-neutral-800/30;
 
   a {
-    @apply ui-h-full ui-px-5 ui-py-4;
+    @apply ui-h-full ui-px-5 ui-py-4 ui-flex ui-flex-col;
   }
 
   .author {
@@ -55,7 +55,7 @@ input[type='text'],
   }
 
   .title {
-    @apply ui-font-bold ui-text-2xl;
+    @apply ui-font-bold ui-text-2xl ui-mb-2;
   }
 
   .content {

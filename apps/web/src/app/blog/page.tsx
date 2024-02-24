@@ -112,13 +112,13 @@ export default function Blog() {
           : [true, true, true].map((_, i) => (
               <div
                 key={i}
-                className='animate-pulse w-full p-4 border border-slate-700/50 rounded-3xl gap-1 flex flex-col'
+                className='animate-pulse w-full p-6 border border-slate-700/50 rounded-3xl gap-1.5 flex flex-col'
               >
-                <div className='animate-pulse bg-slate-700/50 h-4 w-1/3 rounded-full' />
-                <div className='animate-pulse bg-slate-700/50 h-7 w-2/3 rounded-full my-2' />
-                <div className='animate-pulse bg-slate-700/50 h-4 w-full rounded-full' />
-                <div className='animate-pulse bg-slate-700/50 h-4 w-full rounded-full' />
-                <div className='animate-pulse bg-slate-700/50 h-4 w-2/3 rounded-full' />
+                <div className='animate-pulse bg-slate-700/50 h-3 w-1/3 rounded-full' />
+                <div className='animate-pulse bg-slate-700/50 h-5 w-2/3 rounded-full mt-2 mb-3' />
+                <div className='animate-pulse bg-slate-700/50 h-3 w-full rounded-full' />
+                <div className='animate-pulse bg-slate-700/50 h-3 w-full rounded-full' />
+                <div className='animate-pulse bg-slate-700/50 h-3 w-2/4 rounded-full' />
               </div>
             ))}
       </section>

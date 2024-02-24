@@ -28,8 +28,7 @@ This repo is configured to be built with [Docker](https://docs.docker.com/engine
 docker-compose up -d
 ```
 
-Only the first time wait about 10 seconds until MySQL setup all the connections
-Open http://localhost:3000.
+Wait about 10 seconds until MySQL setup all the connections then open http://localhost:3000.
 
 To stop all running containers:
 
@@ -48,11 +47,9 @@ docker-compose down
 ```
 
 # 1. Create only the DB with docker compose
-
 docker-compose -f ./docker-compose-db.yml up
 
 # 2. Run the web and API with turbo
-
 turbo dev
 
 ```
