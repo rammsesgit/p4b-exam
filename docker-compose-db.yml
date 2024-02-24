@@ -10,7 +10,7 @@ services:
       MYSQL_ALLOW_EMPTY_PASSWORD: 1
     volumes:
       - ./seed.sql:/seed.sql
-    entrypoint: [ "bash", "-c", "sleep 10 && mysql --user=root --host=db --port=3306 blog < /seed.sql && exit"] 
+    entrypoint: [ "bash", "-c", "sleep 9 && mysql --user=root --host=db --port=3306 blog < /seed.sql && exit"] 
 
   db:
     container_name: db

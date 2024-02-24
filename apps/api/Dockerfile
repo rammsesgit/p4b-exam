@@ -29,4 +29,4 @@ RUN addgroup --system --gid 1001 nestjs
 RUN adduser --system --uid 1001 nestjs
 USER nestjs
 COPY --from=installer /app .
-CMD node apps/api/dist/main.js
+CMD sleep 9 && node apps/api/dist/main.js
