@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+  db_seeder:
+    container_name: db_seeder
+    image: mysql:8.3.0
+    depends_on:
+      - db
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: 1
+    volumes:
+      - ./seed.sql:/seed.sql
+    entrypoint: [ "bash", "-c", "sleep 10 && mysql --user=root --host=db --port=3306 blog < /seed.sql && exit"] 
+
+  db:
+    container_name: db
+    image: mysql:8.3.0
+    restart: unless-stopped
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_DATABASE: blog
+      MYSQL_ALLOW_EMPTY_PASSWORD: 1

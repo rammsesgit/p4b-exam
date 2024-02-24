@@ -30,11 +30,30 @@ docker-compose up -d
 
 Open http://localhost:3000.
 
-To shutdown all running containers:
+To stop all running containers:
 
 ```
-# Stop all running containers
-docker-compose down --remove-orphans
+docker-compose stop
+```
+
+To stop and remove the containers:
+
+```
+docker-compose down
+```
+
+#### If you want to use Turbo CLI:
+
+```
+
+# 1. Create only the DB with docker compose
+
+docker-compose -f ./docker-compose-db.yml up
+
+# 2. Run the web and API with turbo
+
+turbo dev
+
 ```
 
 ### Utilities
@@ -43,5 +62,4 @@ This Turborepo has some additional tools already setup for you:
 
 - [TypeScript](https://www.typescriptlang.org/) for static type checking
 - [ESLint](https://eslint.org/) for code linting
-- [Jest](https://jestjs.io) test runner for all things JavaScript
 - [Prettier](https://prettier.io) for code formatting
