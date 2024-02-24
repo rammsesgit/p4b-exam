@@ -28,6 +28,7 @@ This repo is configured to be built with [Docker](https://docs.docker.com/engine
 docker-compose up -d
 ```
 
+Only the first time wait about 10 seconds until MySQL setup all the connections
 Open http://localhost:3000.
 
 To stop all running containers:

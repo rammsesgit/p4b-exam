@@ -13,8 +13,7 @@ export default function Blog() {
   const dispatch = useAppDispatch()
 
   const setup = async () => {
-    const profiles = await getProfiles()
-    setProfiles(profiles)
+    setProfiles(await getProfiles())
   }
 
   useEffect(() => {
@@ -31,7 +30,7 @@ export default function Blog() {
       <h1 className='text-center'>Choose your profile</h1>
 
       <section className='grid grid-cols-2 sm:grid-cols-4 gap-6 max-w-2xl mx-auto'>
-        {profiles.length ? (
+        {profiles?.length ? (
           <>
             {profiles.map(p => (
               <button key={p.id} onClick={() => onChangeProfile(p)} className='custom-pulse'>
