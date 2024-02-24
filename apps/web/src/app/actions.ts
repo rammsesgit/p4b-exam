@@ -9,6 +9,15 @@ export async function getProfiles() {
   }
 }
 
+export async function getPost(id: string) {
+  try {
+    const result = await fetch('http://localhost:3001/posts/' + id)
+    return await result.json()
+  } catch (err) {
+    console.error(err)
+  }
+}
+
 export async function getPosts() {
   try {
     const result = await fetch('http://localhost:3001/posts')
@@ -20,14 +29,12 @@ export async function getPosts() {
 
 export async function createPost(post: { author: string; title: string; content: string }) {
   try {
-    console.log('ACTION createPost', post) // TEST:
     const result = await fetch('http://localhost:3001/posts', {
       method: 'POST',
       body: JSON.stringify(post),
       mode: 'cors',
       headers: { 'Content-Type': 'application/json' },
     })
-    // console.log(result) // TEST:
 
     return await result.json()
   } catch (err) {

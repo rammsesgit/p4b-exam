@@ -1,4 +1,5 @@
 import '@repo/ui/styles.css'
+import { getPost } from 'app/actions'
 import { format } from 'date-fns'
 import { Metadata } from 'next'
 import Link from 'next/link'
@@ -7,18 +8,8 @@ export const metadata: Metadata = {
   title: 'Post',
 }
 
-// TEST:
-const post = {
-  id: 1,
-  created_at: new Date().toISOString(),
-  created_by: 'Guest',
-  title: 'A nice big title',
-  content:
-    'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure beatae sit nulla amet praesentium eius non saepe explicabo dolor iste, possimus voluptatem libero fugiat. Ad tempore a quo blanditiis facere.',
-}
-
-export default async function Post({ params }: { params: { blogId: string } }) {
-  // TODO: get the actual post
+export default async function Post({ params }: { params: { postId: string } }) {
+  const post = await getPost(params.postId)
 
   return (
     <>
@@ -38,7 +29,7 @@ export default async function Post({ params }: { params: { blogId: string } }) {
       <h2 className='text-5xl'>{post.title}</h2>
 
       <small className='opacity-75 -mt-10'>
-        By <span className='text-highlight'>{post.created_by}</span> at {format(new Date(post.created_at), 'PP')}.
+        By <span className='text-highlight'>{post.author}</span> at {format(new Date(post.created_at), 'PP')}.
       </small>
 
       <p className='text-lg'>{post.content}</p>
